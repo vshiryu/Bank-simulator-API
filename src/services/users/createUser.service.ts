@@ -3,6 +3,7 @@ import { User } from "../../entities/user.entity";
 import { IUserRequest } from "../../interfaces/user.interfaces";
 import { hash } from "bcryptjs";
 import { AppError } from "../../errors/appError";
+import { Account } from "../../entities/account.entity";
 
 const createUserService = async ({
   username,
@@ -31,12 +32,17 @@ const createUserService = async ({
 
   const hashedPass = await hash(password, 10);
 
+  const accountRepository = AppDataSource.getRepository(Account);
+  const account = accountRepository.create({ balance: 100 });
+  await accountRepository.save(account);
+
   const user = userRepository.create({
     username,
     password: hashedPass,
     name,
     email,
     age,
+    account,
   });
 
   await userRepository.save(user);
