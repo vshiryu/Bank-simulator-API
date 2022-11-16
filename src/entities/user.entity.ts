@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   OneToOne,
+  JoinColumn,
 } from "typeorm";
+import { Account } from "./account.entity";
 
 @Entity("users")
 export class User {
@@ -17,7 +19,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ length: 60 })
+  @Column({ length: 50 })
   name: string;
 
   @Column({ unique: true, length: 256 })
@@ -29,5 +31,7 @@ export class User {
   @CreateDateColumn()
   memberSince: Date;
 
-  //   @OneToOne(() => Accounts, {eager:true})
+  @OneToOne(() => Account, { eager: true })
+  @JoinColumn()
+  account: Account;
 }
