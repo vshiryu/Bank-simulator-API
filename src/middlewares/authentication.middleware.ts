@@ -14,6 +14,9 @@ const authenticationMiddleware = async (
     throw new AppError(401, "Missing authorization");
   }
 
+  if (token.split(" ")[0] !== "Bearer") {
+    throw new AppError(401, "Invalid token");
+  }
   token = token.split(" ")[1];
 
   jwt.verify(

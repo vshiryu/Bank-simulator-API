@@ -33,6 +33,10 @@ const createTransactionService = async ({
     throw new AppError(404, "Credited account not found");
   }
 
+  if (debitedUser.id === creditedUser.id) {
+    throw new AppError(400, "Unable to transfer to yourself");
+  }
+
   if (value <= 0) {
     throw new AppError(400, "Value must be greater than 0");
   }
