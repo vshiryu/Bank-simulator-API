@@ -33,7 +33,7 @@ export class User {
   @CreateDateColumn()
   memberSince: Date;
 
-  @OneToOne(() => Account, { eager: true })
+  @OneToOne(() => Account, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   account: Account;
 }

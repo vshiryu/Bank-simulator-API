@@ -3,7 +3,7 @@ import getBalanceService from "../../services/accounts/getBalance.service";
 
 const getBalanceController = async (req: Request, res: Response) => {
   const id = req.user.id;
-  console.log(req.user);
+
   const account = await getBalanceService(id);
 
   return res.status(200).json(account);

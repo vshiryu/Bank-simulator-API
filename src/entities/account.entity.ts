@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { Transaction } from "./transaction.entity";
 import { Exclude } from "class-transformer";
+import { User } from "./user.entity";
 
 @Entity("accounts")
 export class Account {
@@ -18,6 +19,18 @@ export class Account {
   @Exclude()
   balance: number;
 
-  @OneToMany(() => Transaction, (transaction) => transaction.id)
-  transactions: Transaction[];
+  // @OneToMany(() => Transaction, (transaction) => transaction.id)
+  // transactions: Transaction[];
+
+  @OneToMany(() => Transaction, (transaction) => transaction.debitedAccount, {
+    eager: true,
+  })
+  @Exclude()
+  debitTransactions: Transaction[];
+
+  @OneToMany(() => Transaction, (transaction) => transaction.creditedAccount, {
+    eager: true,
+  })
+  @Exclude()
+  creditTransactions: Transaction[];
 }
