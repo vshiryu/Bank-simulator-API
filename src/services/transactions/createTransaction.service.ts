@@ -54,6 +54,8 @@ const createTransactionService = async ({
   const accountCredited = await accountRepository.findOneBy({
     id: creditedUser.account.id,
   });
+  console.log("---------------------------------");
+  console.log(accountCredited?.transactions);
 
   const updateDebited = await accountRepository.update(debitedUser.account.id, {
     balance: debitedBalance,
