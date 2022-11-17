@@ -48,15 +48,6 @@ const createTransactionService = async ({
     throw new AppError(400, "Insufficient funds");
   }
 
-  const accountDebited = await accountRepository.findOneBy({
-    id: debitedUser.account.id,
-  });
-  const accountCredited = await accountRepository.findOneBy({
-    id: creditedUser.account.id,
-  });
-  console.log("---------------------------------");
-  console.log(accountCredited?.transactions);
-
   const updateDebited = await accountRepository.update(debitedUser.account.id, {
     balance: debitedBalance,
   });
