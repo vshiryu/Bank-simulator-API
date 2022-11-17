@@ -7,6 +7,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { Account } from "./account.entity";
+import { Exclude } from "class-transformer";
 
 @Entity("users")
 export class User {
@@ -17,6 +18,7 @@ export class User {
   username: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({ length: 50 })
