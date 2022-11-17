@@ -26,6 +26,7 @@ const authenticationMiddleware = async (
 
       req.user = {
         id: decoded.sub,
+        accountId: decoded.accountId,
       };
     }
   );
