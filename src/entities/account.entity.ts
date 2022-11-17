@@ -1,5 +1,13 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Transaction } from "./transaction.entity";
+import { Exclude } from "class-transformer";
 
 @Entity("accounts")
 export class Account {
@@ -7,5 +15,9 @@ export class Account {
   id: string;
 
   @Column({ default: 100 })
+  @Exclude()
   balance: number;
+
+  @OneToMany(() => Transaction, (transaction) => transaction.id)
+  transactions: Transaction[];
 }

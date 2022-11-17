@@ -21,12 +21,18 @@ const loginUserService = async ({ username, password }: IUserLogin) => {
     throw new AppError(403, "Incorrect password");
   }
 
-  const token = jwt.sign({}, process.env.SECRET_KEY as string, {
-    subject: user.id,
-    expiresIn: "24h",
-  });
+  const token = jwt.sign(
+    {
+      accountId: user.account.id,
+    },
+    process.env.SECRET_KEY as string,
+    {
+      subject: user.id,
+      expiresIn: "24h",
+    }
+  );
 
-  return { token, userId: user.id };
+  return { token, userId: user.id, accountId: user.account.id };
 };
 
 export default loginUserService;
