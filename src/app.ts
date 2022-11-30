@@ -5,9 +5,11 @@ import { handleErrorMiddleware } from "./middlewares/handleError.middleware";
 import userRoutes from "./routes/user.routes";
 import accountRoutes from "./routes/account.routes";
 import transactionRoutes from "./routes/transaction.routes";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use("/users", userRoutes);
 app.use("/accounts", accountRoutes);
